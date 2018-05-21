@@ -2,7 +2,7 @@ server:
   port: 82
 spring:
   thymeleaf:
-    cache: false
+    cache: true
     encoding: UTF-8
     prefix: classpath:/templates/
   http:
