@@ -12,7 +12,7 @@ spring:
   datasource:
     driver-class-name: org.sqlite.JDBC
 #    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:sqlite:check.db
+    url: jdbc:sqlite:qn.db
 #    url: jdbc:mysql://112.74.185.158:3306/favorites?useUnicode=true&characterEncoding=utf-8&useSSL=true&autoReconnect=true
 #    username: dev
 #    password: Aa111111
