@@ -8,7 +8,6 @@ import com.device.entity.dto.CutImageDTO;
 import com.device.entity.dto.WebCamResultDTO;
 
 import java.util.List;
-import java.util.Map;
 
 public interface MainService {
     public List<Template> getTemplateList();
@@ -34,8 +33,4 @@ public interface MainService {
     public WebCamResultDTO getWebCam();
 
     public String getWebCamImage();
-    /*- 获取ImageInfo.properties  sxf 20180427 -*/
-    public Map<String,String> getImageInfoValue(String file,String imagestr);
-    /*- 获取printerInfo.properties  sxf 20180427 -*/
-    public void labelPrint(String code);
 }

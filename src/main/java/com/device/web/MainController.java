@@ -1,58 +1,47 @@
 package com.device.web;
 
 import com.device.common.enums.UserTypeEnum;
-import com.device.config.CheckConfig;
 import com.device.entity.BaseResult;
 import com.device.entity.Coordinate;
 import com.device.entity.Template;
 import com.device.entity.User;
-import com.device.entity.dto.*;
+import com.device.entity.dto.CheckResultDTO;
+import com.device.entity.dto.CutImageDTO;
+import com.device.entity.dto.TemplateDTO;
+import com.device.entity.dto.WebCamResultDTO;
 import com.device.entity.vo.CheckVO;
 import com.device.entity.vo.WebCanImageVO;
-import com.device.rpc.compareImage;
-import com.device.rpc.serialport;
 import com.device.service.MainService;
 import com.device.service.UserService;
 import com.device.utils.ImageUtils;
-import com.device.utils.SpringContextUtil;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
-import org.opencv.core.Core;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 管理员/操作员
  * 原则：尽量不传图片（传图片url），尽量java端做数据存储，c++只做算法和下位机通信模块
  */
-
 @RequestMapping("main")
 @Controller
 public class MainController {
-    static
-    {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-    }
-
     @Resource
     MainService mainService;
     @Resource
     UserService userService;
     @Resource
     ImageUtils imageUtils;
-    @Resource
-    serialport serial;
 
     //region --------------------------公共操作--------------------------
     @RequestMapping("/admin")
@@ -110,41 +99,6 @@ public class MainController {
         }
 
         return new BaseResult<>(templateDo, true);
-    }
-
-    // 轮询检测，是否按下检测
-    @RequestMapping("/trainingCheck")
-    @ResponseBody
-    public BaseResult<Integer> trainingCheck() {
-        Integer result = 0;
-        try {
-            //读取参数
-            int num = serial.getData(66);
-//            int num = 1;
-            if (num == 1) {//1 已按下
-                Thread.sleep(500);
-                if (serial.getData(66) == 1) {//的确是按下
-                    return new BaseResult<>(1, "开始检测", true);//1
-                } else {
-                    return new BaseResult<>(2, "等待检测", true);//0
-                }
-//                return new BaseResult<>(1, "开始检测", true);//1
-            } else if (num == 2) {//2未按下
-                return new BaseResult<>(2, "等待检测", true);//0
-            } else { //0 故障，查询10次是否仍是0，不是则返回未按下
-                int j = 9;
-                while (j != 0) {
-                    if (serial.getData(66)!=0) {
-                    return new BaseResult<>(2, "等待检测", true);//0
-                    }
-                    j--;
-                }
-                return new BaseResult<>(0, "设备出现故障，请操作员检查设备", true);//2
-            }
-        } catch (Exception e) {
-            return new BaseResult<>("检测异常", false);
-        }
-//        return new BaseResult<>(result, true);
     }
 
     // 检测，轮询，入参 模板id，样图（或者不用传，截图已拿到）。返回 检测id，成功/失败，错误图片集合（检测点序号，路径）
@@ -224,6 +178,7 @@ public class MainController {
         try {
             //  保存模板
             // long tId = mainService.save(templateDTO);
+
         } catch (Exception e) {
             return new BaseResult<>("创建模板异常", false);
         }
@@ -247,10 +202,9 @@ public class MainController {
         String filePath = imageUtils.getGalleryPath();
 
         try {
-//            LocalDateTime now = LocalDateTime.now();
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-//            String imgName = now.format(formatter);
-            String imgName = "muban-1-realtime";
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+            String imgName = now.format(formatter);
             fileName = imgName + ".jpeg";
 
             String imgStr = request.getParameter("image");
@@ -275,7 +229,7 @@ public class MainController {
     @GetMapping("/{imgName}")
     public void getImage(@PathVariable("imgName") String imgName, HttpServletResponse response) {
         response.setContentType("image/jpeg");
-        String filePath = imageUtils.getGalleryPath() + imgName + ".jpg";
+        String filePath = imageUtils.getGalleryPath() + imgName + ".jpeg";
 
         Path path = Paths.get(filePath);
         try {
@@ -293,22 +247,22 @@ public class MainController {
     public BaseResult<WebCanImageVO> getWebCamImage() {
         WebCanImageVO result = new WebCanImageVO();
         try {
-            File file = ResourceUtils.getFile("classpath:ts24.lib");
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-
-//            Resource resource = (Resource) new ClassPathResource("countries.xml");
-//            File file1 = resource.getFile();
-            SpringContextUtil.getBean(CheckConfig.class).setChecked(true); //设值为true
+            String url = mainService.getWebCamImage();
+            if (url == null || url.equalsIgnoreCase("")) {
+                return new BaseResult<>("获取摄像头截图异常", false);
+            }
+            result.setImgUrl(mainService.getWebCamImage());
         } catch (Exception e) {
+            return new BaseResult<>("获取摄像头截图异常", false);
         }
 
         return new BaseResult<>(result, true);
     }
 
-    /*- 修改检测获取数据逻辑  sxf 20180427  start-*/
-    @RequestMapping("/testCheck1")
+
+    @RequestMapping("/testCheck")
     @ResponseBody
-    public BaseResult<CheckResultDTO> testCheck1(HttpServletRequest request, TemplateDTO templateDTO) {
+    public BaseResult<CheckResultDTO> testCheck(HttpServletRequest request, TemplateDTO templateDTO) {
         CheckResultDTO result = null;
         try {
             Template templateDo = mainService.findTemplateById(templateDTO.getId());
@@ -340,89 +294,6 @@ public class MainController {
         return new BaseResult<>(result, true);
     }
 
-    @RequestMapping("/testCheck")
-    @ResponseBody
-    public BaseResult<CheckResultDTO> testCheck(HttpServletRequest request, TemplateDTO templateDTO) {
-        CheckResultDTO result = null;
-
-        try {
-            Template templateDo = mainService.findTemplateById(templateDTO.getId());
-            List<Coordinate> coordinateDo = mainService.findCoordinateByTId((int) templateDTO.getId());
-            result = mainService.check(TemplateDTO.convertToTemplateDTO(templateDo, coordinateDo, templateDTO));
-
-            User user = (User) request.getSession().getAttribute("user");
-           // List<Coordinate> RefsmodelCoordinate = templateDTO.getRefs();
-           // Coordinate modelCoordinate=  coordinateDo.get(2);
-            List<CheckResultItemDTO> FalseReultList = new ArrayList<>();
-            List<CheckResultItemDTO> TrueReultList = new ArrayList<>();
-           //遍历 List<Coordinate> coordinateDo
-            for ( Coordinate modelCoordinate:coordinateDo){
-                CheckResultItemDTO item = new CheckResultItemDTO();
-                int x = modelCoordinate.getX();
-                int y = modelCoordinate.getY();
-                int width = modelCoordinate.getW();
-                int height = modelCoordinate.getH();
-                float Vaulej = modelCoordinate.getValue();
-                String pathj = modelCoordinate.getPathj();
-                String pathg = modelCoordinate.getPathg();
-                int type = modelCoordinate.getType();
-                //对比图片，返回精度值
-                double compareValue =  compareImage.getValue( pathj, pathg, Vaulej, x, y, width, height, type);
-
-                //匹配
-                if (compareValue >=0 && compareValue < 0.01) {
-                    item.setCoordinate(modelCoordinate);
-                    TrueReultList.add(item);
-                } else {
-                    item.setCoordinate(modelCoordinate);
-                    //将错误结果坐标返回;
-                    item.setCoordinate(modelCoordinate);
-                    FalseReultList.add(item);
-                }
-
-            }
-
-            //存在一条错误坐标数据 即为匹配失败
-            if(FalseReultList.size()>0){
-                result.setData(FalseReultList);
-                int unQua = user.getUnQuaNum() + 1;
-                user.setUnQuaNum(unQua);
-                result.setQuaNum(user.getQuaNum());
-                result.setUnQuaNum(unQua);
-                result.setResult(false);
-            }else {
-                result.setData(TrueReultList);
-                int qua = user.getQuaNum() + 1;
-                user.setQuaNum(qua);
-                result.setQuaNum(qua);
-                result.setUnQuaNum(user.getUnQuaNum());
-                result.setResult(true);
-            }
-
-            userService.updateQuaAndUnQua(user);
-            request.getSession().setAttribute("user", user);
-            if (result == null) {
-                return new BaseResult<>("检测异常", false);
-            }
-        } catch (Exception e) {
-            return new BaseResult<>("检测异常", false);
-        }
-
-        return new BaseResult<>(result, true);
-    }
-
-
-    /*- 修改检测获取数据逻辑  sxf 20180427  end-*/
-    /*- 标签打印  sxf 20180427  start-*/
-    @RequestMapping("/labelPrint")
-    @ResponseBody
-    public void labelPrint(HttpServletRequest request) {
-      //  String code = request.getSession().getAttribute("code").toString();
-        String code ="  LZ-FA-060-01";
-        mainService.labelPrint(code);
-    }
-
-    /*- 标签打印  sxf 20180427  end-*/
     @RequestMapping("/testCutImage")
     @ResponseBody
     public BaseResult<CutImageDTO> testCutImage(CutImageDTO cutImageDTO) {

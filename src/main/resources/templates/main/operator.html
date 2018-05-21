@@ -10,7 +10,8 @@
     <script th:src="@{/js/jquery-3.1.0.min.js}"/>
     <script th:src="@{/js/jquery.webcam.js}"/>
     <script th:src="@{/js/bootstrap.min.js}"/>
-    <script id="indexjs" th:src="@{/js/index.js}"/>
+    <script th:src="@{/js/index.js}"/>
+    <script id="jsbase" th:src="@{/js/}"/>
 </head>
 <body class="container">
 <div class="container-fluid loginout">
@@ -25,26 +26,23 @@
             <div class="col-md-12">
                 <div class="row-fluid ui-header">
                     <!-- 按钮触发模态框 -->
-                    <button id="a1" class="btn btn-primary  ui-header-button" data-toggle="modal"
-                            data-target="#choose-model">
+                    <button class="btn btn-primary  ui-header-button" data-toggle="modal" data-target="#choose-model">
                         A选择模板
                     </button>
-                    <a id="a2" class="btn btn-primary ui-margin-right20" href="javascript:void(0)"
+                    <a class="btn btn-primary ui-margin-right20" href="javascript:void(0)"
                        th:onclick="'javascript:user_edit(\''+${user.id}+'\');'">B修改密码</a>
-                    <!--<a  id="a3" class="btn btn-primary ui-margin-right20" href="javascript:void(0)"-->
-                    <!--th:onclick="'javascript:testCheck();'">测试检测</a>-->
-                    <!--<a  id="a4" class="btn btn-primary ui-margin-right20" href="javascript:void(0)"-->
-                    <!--th:onclick="'javascript:testCutImage();'">测试分割</a>-->
-                    <!--<a  id="a5" class="btn btn-primary ui-margin-right20" href="javascript:void(0)"-->
-                    <!--th:onclick="'javascript:testWebCamCapture();'">测试摄像头截图</a>-->
+                    <a class="btn btn-primary ui-margin-right20" href="javascript:void(0)"
+                       th:onclick="'javascript:testCheck();'">测试检测</a>
+                    <a class="btn btn-primary ui-margin-right20" href="javascript:void(0)"
+                       th:onclick="'javascript:testCutImage();'">测试分割</a>
+                    <a class="btn btn-primary ui-margin-right20" href="javascript:void(0)"
+                       th:onclick="'javascript:testWebCamCapture();'">测试摄像头截图</a>
                 </div>
                 <div class="row-fluid ui-content">
                     <div class="col-md-8 ui-content-left">
                         <h4 class="h4-title">操作台</h4>
                         <div class="ui-content-left-main white-word ui-content-left-main-1">
-                            <canvas id="canvasEl" width="1280" height="1024">
-                            </canvas>
-                            <!--<img th:src="@{/images/test/muban-1-template.jpg}" class="left-img" id="left-img"></img>-->
+                            <img th:src="@{/images/test/muban-1-template.jpg}" class="left-img" id="left-img"></img>
                         </div>
                         <!--todo 利用cancas，错误的图片打个x上去，利用图层覆盖-->
                         <!--<div class="ui-content-left-main white-word ui-content-left-main-2">-->
@@ -59,8 +57,7 @@
 
                         <div class="row-fluid widget r2">
                             <div class="col-md-4 ">
-                                <input type="button" id="check" class="btn btn-info r-opr-unit" onclick="testCheck()"
-                                       value="检测"/>
+                                <input type="button" class="btn btn-info r-opr-unit" onclick="testCheck()" value="检测"/>
                             </div>
                             <div class="col-md-4 ">
                                 <input type="button" class="btn btn-info r-opr-unit" onclick="operator_check()"
@@ -81,7 +78,7 @@
                         <div class="row-fluid widget r4">
                             <h4 class="h4-title">操作结果</h4>
                             <div class="conntent-result white-word">
-                                等待检测
+                               等待检测
                             </div>
                         </div>
                     </div>
@@ -110,6 +107,7 @@
                         <div class="col-sm-8">
                             <select name="modelNmae" id="modelNmae" class="form-control">
                                 <option id="1">模板1</option>
+                                <option id="2">模板2</option>
                             </select>
                         </div>
                     </div>
@@ -221,7 +219,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th width="20%">名称</th>
+                                    <th width="20%">序号</th>
                                     <th width="40%">正确图片</th>
                                     <th width="40%">错误图片</th>
                                 </tr>
@@ -229,6 +227,11 @@
                                 <tbody>
                                 <tr>
                                     <td>F01</td>
+                                    <td><img th:src="@{/images/test/F01N1.png}"/></td>
+                                    <td><img th:src="@{/images/test/F01N1F.png}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>F02</td>
                                     <td><img th:src="@{/images/test/F01N1.png}"/></td>
                                     <td><img th:src="@{/images/test/F01N1F.png}"/></td>
                                 </tr>
@@ -245,15 +248,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    var canvasSreen = document.getElementById("canvasEl");
-    var ctx = canvasSreen.getContext('2d');
-    var img1 = new Image();
-    img1.src = "/images/test/muban-1-template.jpg";
-    img1.onload = function () {
-        ctx.drawImage(img1, 0, 0);
-    };
-</script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.device.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 
 /**
@@ -12,19 +14,19 @@ public class Coordinate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     //类型
-//    @NotEmpty(message = "类型 不能为空")
+    @NotEmpty(message = "类型 不能为空")
     @Column(nullable = false)
-    private int type;//1数字保险片，2继电器坐标
+    private int type;//1参考点，2检测点
     //类型
-//    @NotEmpty(message = "模板id 不能为空")
+    @NotEmpty(message = "模板id 不能为空")
     @Column(nullable = false)
     private long tId;//模板id
     //名称
-//    @NotEmpty(message = "名称 不能为空")
+    @NotEmpty(message = "名称 不能为空")
     @Column(nullable = false)
     private String name;//名称
     //图片路径
-//    @NotEmpty(message = "图片路径 不能为空")
+    @NotEmpty(message = "图片路径 不能为空")
     @Column(nullable = false)
     private String imgUrl;//图片路径
     //分割系数值
@@ -39,18 +41,7 @@ public class Coordinate {
     @Column(nullable = false)
     private int h;//宽
 
-    @Column(nullable = false)
-    private String pathj;  //模板路径
-
-    @Column(nullable = false)
-    private String pathg;  //实时截图路径
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -60,14 +51,6 @@ public class Coordinate {
 
     public void setType(int type) {
         this.type = type;
-    }
-
-    public long getTId() {
-        return tId;
-    }
-
-    public void setTId(long tId) {
-        this.tId = tId;
     }
 
     public String getName() {
@@ -84,14 +67,6 @@ public class Coordinate {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-    }
-
-    public float getValue() {
-        return value;
-    }
-
-    public void setValue(float value) {
-        this.value = value;
     }
 
     public int getX() {
@@ -126,19 +101,27 @@ public class Coordinate {
         this.h = h;
     }
 
-    public String getPathj() {
-        return pathj;
+    public long getId() {
+        return id;
     }
 
-    public void setPathj(String pathj) {
-        this.pathj = pathj;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getPathg() {
-        return pathg;
+    public long gettId() {
+        return tId;
     }
 
-    public void setPathg(String pathg) {
-        this.pathg = pathg;
+    public void settId(long tId) {
+        this.tId = tId;
+    }
+
+    public float getValue() {
+        return value;
+    }
+
+    public void setValue(float value) {
+        this.value = value;
     }
 }

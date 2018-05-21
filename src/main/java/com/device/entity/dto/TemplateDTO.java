@@ -11,8 +11,8 @@ public class TemplateDTO {
     private String name;//模板名称
     private String imgUrl;//模板图片地址
     private String currentImgUrl;//当前截图的图片地址 todo 考虑换成实时图像源 数据结构。只有做检测入参的时候有值
-    private List<Coordinate> refs;// 1 数字检测点  集合
-    private List<Coordinate> checks;// 2 继电器检测点 集合
+    private List<Coordinate> refs;//参考点集合
+    private List<Coordinate> checks;//检测点集合
 
     public long getId() {
         return id;

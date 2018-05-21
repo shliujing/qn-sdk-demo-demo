@@ -1,7 +1,5 @@
 package com.device.entity.dto;
 
-import com.device.entity.Coordinate;
-
 /**
  * 检测返回 错误的坐标点的数据结构
  */
@@ -14,8 +12,6 @@ public class CheckResultItemDTO {
     private String trueImgUrl;
     //错误图片url
     private String wrongImgUrl;
-    //错误图片的坐标数据，用于坐标 画X
-    private Coordinate coordinate;
 
     public int getId() {
         return id;
@@ -47,13 +43,5 @@ public class CheckResultItemDTO {
 
     public void setWrongImgUrl(String wrongImgUrl) {
         this.wrongImgUrl = wrongImgUrl;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public Coordinate getCoordinate() {
-        return coordinate;
     }
 }

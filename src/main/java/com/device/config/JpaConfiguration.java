@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 
 /**
+ * @author wuweifeng wrote on 2018/3/2.
  */
 @Configuration
 @EnableJpaRepositories(

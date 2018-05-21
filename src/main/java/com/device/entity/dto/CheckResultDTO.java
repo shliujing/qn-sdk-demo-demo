@@ -1,13 +1,11 @@
 package com.device.entity.dto;
 
-import com.device.entity.Coordinate;
-
 import java.util.List;
 
 public class CheckResultDTO {
 
     List<CheckResultItemDTO> data;//错误图片集合
-    private  Coordinate coordinate;
+
     private int quaNum;//合格数，在controller层处理 赋值
 
     private int unQuaNum;//不合格数，在controller层处理 赋值
@@ -45,13 +43,4 @@ public class CheckResultDTO {
     public void setUnQuaNum(int unQuaNum) {
         this.unQuaNum = unQuaNum;
     }
-
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
-
 }

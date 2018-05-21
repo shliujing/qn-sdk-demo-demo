@@ -29,13 +29,6 @@ public class BaseResult<T> {
         this.code = result ? Const.successCode : Const.errorCode;
     }
 
-    public BaseResult(T obj, String desc, boolean result) {
-        this.obj = obj;
-        this.desc = desc;
-        this.result = result;
-        this.code = result ? Const.successCode : Const.errorCode;
-    }
-
     private void setDesc(boolean result) {
         if (result) {
             this.desc = Const.successDesc;
