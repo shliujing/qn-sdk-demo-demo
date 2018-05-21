@@ -1,0 +1,15 @@
+app:
+  name: device-check
+
+spring:
+  profiles:
+    active: dev
+#    active: pro
+#    active: iamlj
+
+win:
+  gallery:
+    dir: c:/device-check/main/
+linux:
+  gallery:
+    dir: /var/local/device-check/main/

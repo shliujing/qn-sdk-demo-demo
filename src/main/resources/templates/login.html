@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>登录</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <script th:src="@{/js/login.js}"/>
+</head>
+<body>
+<div class="ui-mask" id="mask" onselectstart="return false"></div>
+<div class="ui-dialog" id="dialogMove" onselectstart='return false;'>
+    <form action="/user/login" method="post">
+        <div class="ui-dialog-title" id="dialogDrag" onselectstart="return false;">
+            人员登录
+            <a class="ui-dialog-closebutton" href="javascript:hideDialog();"></a>
+        </div>
+        <div class="ui-dialog-content">
+            <div class="ui-dialog-l40 ui-dialog-pt15">
+                <input class="ui-dialog-input ui-dialog-input-username" name="account" type="input" placeholder="工号" th:value="${user.account}"/>
+            </div>
+            <div class="ui-dialog-l40 ui-dialog-pt15">
+                <input class="ui-dialog-input ui-dialog-input-password" name="password" type="password" placeholder="密码" th:value="${user.password}"/>
+            </div>
+            <br/>
+            <div class="ui-error-word label label-danger" th:text="${errorMsg}">
+            </div>
+<!--
+            <div th:if="${#fields.hasErrors('account')}" class="alert alert-error">
+                <p th:each="error : ${#fields.errors('*')}" th:text="${error}">
+                    Validation error</p>
+            </div>-->
+            <div>
+                <input type="submit" value="登录" class="ui-dialog-submit"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    showDialog();
+</script>
+</body>
+</html>

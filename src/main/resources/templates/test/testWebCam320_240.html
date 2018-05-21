@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3"/>
+    <script th:src="@{/js/jquery-3.1.0.min.js}"/>
+    <!--<script src="http://libs.baidu.com/jquery/1.6.4/jquery.min.js"/>-->
+    <script th:src="@{/js/jquery.webcam.js}"/>
+    <script th:src="@{/js/test.js}"/>
+    <script id = "jsbase" th:src="@{/js/}"/>
+    <style type="text/css">
+        #webcam {
+            border: 1px solid #666666;
+            width: 320px;
+            height: 240px;
+        }
+
+        #photos {
+            border: 1px solid #666666;
+            width: 320px;
+            height: 240px;
+        }
+
+        .btn {
+            width: 320px;
+            height: auto;
+            margin: 5px 0px;
+        }
+
+        .btn input[type=button] {
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="webcam"></div>
+<div class="btn">
+    <input type="button" value="删除" id="delBtn" onclick="delPhoto();"/>
+    <input type="button" value="拍照" id="saveBtn" onclick="savePhoto();"/>
+
+</div>
+<div id="photos">
+    <img src="" id="img"/>
+</div>
+<script type="text/javascript">
+
+</script>
+
+</body>
+</html>

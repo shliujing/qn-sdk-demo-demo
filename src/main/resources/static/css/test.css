@@ -1,0 +1,196 @@
+body {
+    background: #ebebeb;
+    padding-right: 15px !important;
+}
+
+.main-content {
+    height: 750px;
+}
+
+.ui-content-left {
+    height: 637px;
+    background: #fff;
+    padding: 10px 10px;
+}
+
+.ui-content-left-main {
+    height: 579px;
+    background: #927cd4;
+    overflow: scroll;
+}
+
+.ui-header {
+    margin-bottom: 10px;
+}
+
+.ui-header-button {
+    margin-right: 20px;
+}
+
+.h1-center {
+    text-align: center;
+}
+
+.modal-header {
+    text-align: center;
+}
+
+.modal-content1 {
+    margin: 0 auto;
+    width: 70%;
+    height: 100px;
+    padding: 30px 15px;
+}
+
+.modal-content1 .modal-content1-label {
+    text-align: right;
+    padding-top: 6px;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.ui-margin-right20 {
+    margin-right: 20px;
+}
+
+.user-add-msg {
+    color: red;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.h4-title {
+    margin-top: 0;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #a5debb;
+}
+
+.widget {
+    background: #fff;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+}
+
+.widget .conntent-realtime {
+    /*background: #c9d2a7;*/
+    height: 240px;
+}
+
+.widget .conntent-result {
+    background: #2091d1;
+    height: 122px;
+}
+
+.widget .conntent-result-admin {
+    background: #2091d1;
+    height: 179px;
+}
+
+.white-word {
+    color: white;
+}
+
+.r-opr-unit {
+    height: 50px;
+}
+
+.r-opr-unit-admin-2 {
+    margin-left: -12px;
+}
+
+.r-opr-unit-admin-3 {
+    margin-left: -17px;
+}
+
+.r1 {
+    height: 300px;
+}
+
+.r2 {
+    background: #fff;;
+    height: 70px;
+    text-align: center;
+}
+
+.r2 div {
+    display: inline-block;
+}
+
+.r3 {
+    height: 42px;
+    text-align: center;
+}
+
+.r4 {
+    height: 180px;
+}
+
+.r4-admin {
+    height: 237px;
+}
+
+/*弹出层垂直居中*/
+.modal > div { /* 追加此行 */
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-dialog {
+    /* 略去展示原有内容，此处只显示追加内容 */
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.modal-content {
+    /* 略去展示原有内容，此处只显示追加内容 */
+    display: block;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.loginout {
+    text-align: right;
+    padding: 10px 20px 0px 0px;
+    background: #101010;
+    width: 95%;
+    height: 42px;
+}
+
+.loginout-a {
+    color: white;
+}
+
+.sidebar {
+    padding-right: 0px;
+}
+
+.width95 {
+    margin: 0 auto;
+    width: 95%;
+}
+
+.user-modal-content {
+    padding: 30px 15px;
+}
+
+.user-modal-footer {
+    margin-top: -10px;
+}
+
+.user-modal-footer-check {
+    margin-top: -20px;
+}
+
+th, tr {
+    text-align: center;
+}
+
+.left-img{
+    /*width: 1280px;*/
+    /*height: 960px;*/
+    width: 750px;
+}

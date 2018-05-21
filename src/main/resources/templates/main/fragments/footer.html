@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <title>选择检测模板</title>
+</head>
+<body>
+<div th:fragment="footer" class="modal fade" id="choose-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        选择检测模板
+                    </h4>
+                </div>
+                <div class="modal-content1">
+                    <label for="modelNmae"
+                           class="col-sm-4 control-label modal-content1-label">模板名称：</label>
+                    <div class="col-sm-8">
+                        <select name="modelNmae" id="modelNmae" class="form-control">
+                            <option id="1">模板1</option>
+                            <option id="2">模板2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">
+                        确定
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

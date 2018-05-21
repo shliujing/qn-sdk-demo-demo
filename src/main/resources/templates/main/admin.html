@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>管理员主界面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script th:src="@{/js/jquery-3.1.0.min.js}"/>
+    <script th:src="@{/js/jquery.webcam.js}"/>
+    <script th:src="@{/js/bootstrap.min.js}"/>
+    <script th:src="@{/js/index.js}"/>
+    <script id = "jsbase" th:src="@{/js/}"/>
+</head>
+<body class="container">
+<div class="container-fluid loginout">
+    <a th:href="@{/user/loginout}" class=" loginout-a">退出</a>
+</div>
+<br/>
+<h1 class="h1-center">管理员主界面</h1>
+<br/><br/>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-md-12">
+                <div class="ui-header">
+                    <!-- todo鼠标可以截图 -->
+                    <button class="btn btn-primary ui-header-button" onclick="">
+                        A截取参考点
+                    </button>
+                    <button class="btn btn-primary ui-header-button" onclick="">
+                        B截取检测点
+                    </button>
+                    <button class="btn btn-primary  ui-header-button" data-toggle="modal"
+                            data-target="#choose-checkpoint">
+                        C选择检测点
+                    </button>
+                    <button class="btn btn-primary  ui-header-button" data-toggle="modal" data-target="#create-mymodel">
+                        D创建模板
+                    </button>
+                    <a th:href="@{/user/list}" class="btn btn-primary   ui-header-button">E人员管理</a>
+                    <!--<a class="btn btn-primary ui-margin-right20" href="javascript:void(0)"-->
+                       <!--th:onclick="'javascript:user_edit(\''+${user.id}+'\');'">F修改密码</a>-->
+
+                    <!--todo-->
+                    <a class="btn btn-primary ui-margin-right20" href="javascript:void(0)"
+                       th:onclick="'javascript:user_edit(\''+${13}+'\');'">F修改密码</a>
+                </div>
+                <div class="row-fluid ui-content">
+                    <div class="col-md-8 ui-content-left">
+                        <h4 class="h4-title">操作台</h4>
+                        <div class="ui-content-left-main white-word">检测图像检测截图</div>
+                    </div>
+                    <div class="col-md-4 sidebar">
+                        <div class="row-fluid widget r1">
+                            <h4 class="h4-title">实时画面</h4>
+                            <div class="conntent-realtime white-word"></div>
+                        </div>
+
+                        <div class="row-fluid widget r2">
+                            <div class="col-md-4">
+                                <input type="button" class="btn btn-info r-opr-unit" value="新建模板"/>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="button" class="btn btn-info r-opr-unit r-opr-unit-admin-2" disabled="true" value="编辑模板"/>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="button" class="btn btn-info r-opr-unit r-opr-unit-admin-3" value="删所有矩形"/>
+                            </div>
+                        </div>
+                        <div class="row-fluid widget r4-admin">
+                            <h4 class="h4-title">操作结果</h4>
+                            <div class="conntent-result-admin white-word">
+                                F01 学习成功<br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 选择检测模板 -->
+    <div class="modal fade" id="choose-checkpoint" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            选择检测模板
+                        </h4>
+                    </div>
+                    <div class="modal-content1">
+                        <label for="modelNmae"
+                               class="col-sm-4 control-label modal-content1-label">模板名称：</label>
+                        <div class="col-sm-8">
+                            <select name="modelNmae" id="modelNmae" class="form-control">
+                                <option id="1">模板1</option>
+                                <option id="2">模板2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">
+                            确定
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 创建模板 -->
+    <div class="modal fade" id="create-mymodel" tabindex="-1" role="dialog" aria-labelledby="create-mymodel-label"
+         aria-hidden="true">
+        <div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="create-mymodel-label">
+                            创建模板
+                        </h4>
+                    </div>
+                    <div class="modal-content1">
+                        <label for="modelNmae"
+                               class="col-sm-4 control-label modal-content1-label">模板名称：</label>
+                        <div class="col-sm-8">
+                            <select name="modelNmae" id="modelNmae" class="form-control">
+                                <option id="1">模板1</option>
+                                <option id="2">模板2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">
+                            确定
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改密码 -->
+    <div class="modal fade" id="user-edit" tabindex="-1" role="dialog" aria-labelledby="edit-userName"
+         aria-hidden="true">
+        <div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="edit-userName-label">
+                            修改密码
+                        </h4>
+                    </div>
+                    <div class="form-horizontal" >
+                        <input type="hidden" name="edit-id" id="edit-id" />
+                        <!--<input type="hidden" name="userTypeName" id="edit-userTypeName" value="管理员"/>-->
+                        <div class="user-modal-content">
+                            <div class="form-group">
+                                <label for="edit-userName" class="col-sm-3 control-label">姓名：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userName" id="edit-userName" readonly="readonly"
+                                           placeholder="姓名"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-userTypeName" class="col-sm-3 control-label">权限：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userTypeName" id="edit-userTypeName" readonly="readonly"
+                                           placeholder="权限"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-account" class="col-sm-3 control-label">工号：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="account" id="edit-account" readonly="readonly"
+                                           placeholder="工号"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-password" class="col-sm-3 control-label">密码：</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" name="password" id="edit-password"
+                                           placeholder="密码"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-password_check" class="col-sm-3 control-label">重复密码：</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" name="password_check"
+                                           id="edit-password_check" placeholder="重复密码" onblur="edit_pwd_check()"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-8 user-add-imgUrl" name="edit-warning" id="edit-warning"
+                                     th:text="${errorMsg}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer user-modal-footer">
+                            <input type="button" onclick="edit_submit()" value="确定" class="btn btn-primary"/>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
