@@ -3,9 +3,8 @@ app:
 
 spring:
   profiles:
-    active: dev
-#    active: pro
-#    active: iamlj
+#    active: dev
+    active: pro
 
 win:
   gallery:

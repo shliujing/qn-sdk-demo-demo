@@ -2,7 +2,7 @@ server:
   port: 82
 spring:
   thymeleaf:
-    cache: true
+    cache: false
     encoding: UTF-8
     prefix: classpath:/templates/
   http:
@@ -10,16 +10,16 @@ spring:
       max-file-size: 10Mb
       max-request-size: 10Mb
   datasource:
-#    driver-class-name: org.sqlite.JDBC
-    driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:sqlite:qn.db
-    url: jdbc:mysql://112.74.185.158:3306/favorites?useUnicode=true&characterEncoding=utf-8&useSSL=true&autoReconnect=true
-    username: dev
-    password: Aa111111
+    driver-class-name: org.sqlite.JDBC
+#    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:sqlite:qn.db
+#    url: jdbc:mysql://112.74.185.158:3306/favorites?useUnicode=true&characterEncoding=utf-8&useSSL=true&autoReconnect=true
+#    username: dev
+#    password: Aa111111
   jpa:
-#    database-platform: com.device.config.SQLiteDialect
+    database-platform: com.device.config.SQLiteDialect
     hibernate:
       ddl-auto: update
-      dialect: org.hibernate.dialect.MySQL5Dialect
+#      dialect: org.hibernate.dialect.MySQL5Dialect
     show-sql: true
 #    generate-ddl:  true
