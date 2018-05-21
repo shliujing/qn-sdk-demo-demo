@@ -1,5 +1,5 @@
 app:
-  name: device-check
+  name: qn-sdk-demo-web
 
 spring:
   profiles:
@@ -9,7 +9,7 @@ spring:
 
 win:
   gallery:
-    dir: c:/device-check/main/
+    dir: c:/qn-sdk-demo-web/main/
 linux:
   gallery:
-    dir: /var/local/device-check/main/
+    dir: /var/local/qn-sdk-demo-web/main/
