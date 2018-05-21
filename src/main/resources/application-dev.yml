@@ -17,7 +17,7 @@ spring:
 #    username: dev
 #    password: Aa111111
   jpa:
-    database-platform: com.device.config.SQLiteDialect
+    database-platform: com.qiniu.config.SQLiteDialect
     hibernate:
       ddl-auto: update
 #      dialect: org.hibernate.dialect.MySQL5Dialect

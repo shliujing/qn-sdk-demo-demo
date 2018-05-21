@@ -14,7 +14,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <start-class>com.device.MainApplication</start-class>
+        <start-class>com.qiniu.MainApplication</start-class>
     </properties>
 
     <dependencies>
