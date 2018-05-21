@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>生成Token页</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/api.css}"/>
+    <script th:src="@{/js/jquery-3.1.0.min.js}"/>
+    <script th:src="@{/js/bootstrap.min.js}"/>
+    <script th:src="@{/js/api.js}"/>
+</head>
+<body class="container">
+<div class="container-fluid loginout">
+    <a th:href="@{/user/loginout}" class=" loginout-a">退出</a>
+</div>
+<br/>
+<h1 class="h1-center">生成Token页</h1>
+<br/><br/>
+<div class=" width95">
+    <div class="form-group">
+        <div class="form-horizontal">
+            <div class="user-modal-content">
+                <div class="form-group">
+                    <label for="ak" class="col-sm-3 control-label">AK：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="ak" id="ak"
+                               placeholder="如 VYw7rh_P_P6g6IH_v0zw1Upry5muffStXIly8AsS"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sk" class="col-sm-3 control-label">SK：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="sk" id="sk"
+                               placeholder="如 ctSGEg8UXy_MNpjMbcHf66zISEXX69cRogZVurIk"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="url" class="col-sm-3 control-label">Url：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="url" id="url"
+                               placeholder="如 /buckets\n"/>
+                    </div>
+                </div>
+
+                <div class="form-group api-hiden">
+                    <label for="token" class="col-sm-3 control-label">Token：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="token" id="token"
+                               placeholder="如 VYw7rh_P_P6g6IH_v0zw1Upry5muffStXIly8AsS:RpAzDZSRMKQ6G2gFTN9FeHmADiw="/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-8 user-add-imgUrl" name="warning" id="warning"
+                         th:text="${errorMsg}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer user-modal-footer">
+                <input type="button" id="gen-token" value="生成" class="btn btn-primary"/>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

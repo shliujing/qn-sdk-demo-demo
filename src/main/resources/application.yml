@@ -13,3 +13,7 @@ win:
 linux:
   gallery:
     dir: /var/local/qn-sdk-demo-web/main/
+mac:
+  gallery:
+    dir: /Users/jingliu/Documents/qn-sdk-demo-web/main/
+

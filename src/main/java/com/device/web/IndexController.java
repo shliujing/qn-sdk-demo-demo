@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @RequestMapping("/")
     public String index(@ModelAttribute("errorMsg") String errorMsg, @ModelAttribute("user") UserLoginVO user, Model model) {
-//        todo del
-        user.setAccount("a");
+        user.setAccount("admin");
         user.setPassword("111111");
 
         model.addAttribute("user", user);

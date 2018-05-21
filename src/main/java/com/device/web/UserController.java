@@ -59,9 +59,9 @@ public class UserController {
         request.getSession().setAttribute("user", userDo);
 
         if (UserTypeEnum.ADMIN.getVal().equals(userDo.getUserTypeName())) {
-            return new ModelAndView("redirect:/main/admin");
+            return new ModelAndView("redirect:/api/index");
         } else {
-            return new ModelAndView("redirect:/main/operator");
+            return new ModelAndView("redirect:/api/index");
         }
 
     }
