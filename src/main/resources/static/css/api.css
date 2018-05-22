@@ -4,17 +4,19 @@ body {
     min-width: 1170px;
 }
 
-.api-hiden{
+.api-hiden {
     display: none;
 }
 
-
-.api-bottom{
+.api-bottom {
     text-align: center;
     margin-top: 30px;
 }
 
-
+.api-title-right {
+    width: 55%;
+    float: right;
+}
 
 .main-content {
     height: 750px;
@@ -37,8 +39,7 @@ body {
     overflow-y: scroll;
 }
 
-
-.ui-content-left-main-2{
+.ui-content-left-main-2 {
     z-index: -2;
 }
 
@@ -212,7 +213,7 @@ th, tr {
     text-align: center;
 }
 
-.left-img{
+.left-img {
     /*width: 1280px;*/
     /*height: 960px;*/
     /*width: 750px;*/
