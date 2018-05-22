@@ -18,6 +18,16 @@ body {
     float: right;
 }
 
+.api-center {
+    text-align: center;
+}
+.api-modal-content {
+    margin-top: 20px;
+}
+.api-modal-border0{
+    border: 0px;
+}
+
 .main-content {
     height: 750px;
 }
