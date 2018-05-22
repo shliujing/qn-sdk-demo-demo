@@ -145,12 +145,12 @@
                 </div>
                 <div class="clearfix"></div>
 
+
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>生成管理凭证
-                                    <small></small>
                                 </h2>
 
                                 <ul class="nav navbar-right panel_toolbox">
@@ -227,8 +227,8 @@
 
                                     <div class="ln_solid"></div>
                                     <div class="form-group api-center">
-                                        <button id="gen-token" class="btn btn-success">生成</button>
-                                        <button class="btn btn-danger" type="reset">重置</button>
+                                        <button id="access-gen-token" class="btn btn-success">生成</button>
+                                        <!--<button class="btn btn-danger" type="reset">重置</button>-->
                                     </div>
                                     <div class="form-group api-bottom">
                                         <code>
@@ -243,6 +243,219 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>生成上传凭证
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content" style="display: none;">
+                                <div class="form-horizontal form-label-left" method="post" onsubmit="return false"
+                                     action="##">
+                                    <p><span>参考七牛文档：</span><span><a
+                                            href="https://developer.qiniu.com/kodo/manual/1208/upload-token">上传凭证</a></span>
+                                    </p>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="upload-ak">AK： <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   name="upload-ak" id="upload-ak"
+                                                   placeholder="如 VYw7rh_P_P6g6IH_v0zw1Upry5muffStXIly8AsS"
+                                                   required="required"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="upload-sk">SK： <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   name="upload-sk" id="upload-sk"
+                                                   placeholder="如 ctSGEg8UXy_MNpjMbcHf66zISEXX69cRogZVurIk"
+                                                   required="required"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="upload-bucket">Bucket： <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   name="upload-bucket" id="upload-bucket" placeholder="如 /buckets\n" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="upload-key">Key：
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   name="upload-key" id="upload-key" placeholder="如 a.jpg"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="upload-token">上传凭证：
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   disabled="disabled" id="upload-token" name="upload-token"
+                                                   placeholder="生成值如 VYw7rh_P_P6g6IH_v0zw1Upry5muffStXIly8AsS:RpAzDZSRMKQ6G2gFTN9FeHmADiw="
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="upload-retuen-data">返回数据：
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <textarea id="upload-retuen-data"
+                                                      name="upload-retuen-data"
+                                                      placeholder="Json 或 Text 数据"
+                                                      class="form-control col-md-7 col-xs-12" disabled="disabled">
+                                            </textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group api-center">
+                                        <button id="upload-gen-token" class="btn btn-success">生成</button>
+                                        <!--<button class="btn btn-danger" type="reset">重置</button>-->
+                                    </div>
+                                    <div class="form-group api-bottom">
+                                        <code>
+                                            <a class="" href="#" data-toggle="modal"
+                                               data-target="#upload-gen-token-modal">
+                                                Java 代码
+                                            </a>
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>生成下载凭证
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content" style="display: none;">
+                                <div class="form-horizontal form-label-left" method="post" onsubmit="return false"
+                                     action="##">
+                                    <p><span>参考七牛文档：</span><span><a
+                                            href="https://developer.qiniu.com/kodo/manual/1208/down-token">上传凭证</a></span>
+                                    </p>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="down-ak">AK： <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   name="down-ak" id="down-ak"
+                                                   placeholder="如 VYw7rh_P_P6g6IH_v0zw1Upry5muffStXIly8AsS"
+                                                   required="required"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="down-sk">SK： <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   name="down-sk" id="down-sk"
+                                                   placeholder="如 ctSGEg8UXy_MNpjMbcHf66zISEXX69cRogZVurIk"
+                                                   required="required"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="down-url">Url： <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   name="down-url" id="down-url" placeholder="如 /buckets\n" required="required"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="down-expires">Expires（过期时间）：
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   name="down-expires" id="down-expires" placeholder="如 3600，该值为默认值，即1h"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="down-token">下载凭证：
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-7 col-xs-12"
+                                                   disabled="disabled" id="down-token" name="down-token"
+                                                   placeholder="生成值如 VYw7rh_P_P6g6IH_v0zw1Upry5muffStXIly8AsS:RpAzDZSRMKQ6G2gFTN9FeHmADiw="
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="down-retuen-data">返回数据：
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <textarea id="down-retuen-data"
+                                                      name="down-retuen-data"
+                                                      placeholder="Json 或 Text 数据"
+                                                      class="form-control col-md-7 col-xs-12" disabled="disabled">
+                                            </textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group api-center">
+                                        <button id="down-gen-token" class="btn btn-success">生成</button>
+                                        <!--<button class="btn btn-danger" type="reset">重置</button>-->
+                                    </div>
+                                    <div class="form-group api-bottom">
+                                        <code>
+                                            <a class="" href="#" data-toggle="modal"
+                                               data-target="#down-gen-token-modal">
+                                                Java 代码
+                                            </a>
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <!-- /page content -->
@@ -258,7 +471,6 @@
     </div>
 </div>
 
-<!-- 选择检测模板 -->
 <div class="modal fade" id="gen-token-modal" tabindex="-1" role="dialog" aria-labelledby="gen-token-modal-title"
      aria-hidden="true">
     <div>
@@ -270,6 +482,82 @@
                     </button>
                     <h4 class="modal-title" id="gen-token-modal-title">
                         Java 生成管理凭证代码
+                    </h4>
+                </div>
+                <div class="api-modal-content">
+                    <div class="col-sm-12">
+                <pre class="prettyprint  linenums ">
+AccessTokenVoOut result = new AccessTokenVoOut();
+//设置好账号的ACCESS_KEY和SECRET_KEY
+String ACCESS_KEY = tokenVoIn.getAk();
+String SECRET_KEY = tokenVoIn.getSk();
+String url = tokenVoIn.getUrl();
+//密钥配置
+Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+String token = auth.sign(url);
+result.setToken(token);
+result.setJson(JSON.toJSONString(token));
+                       </pre>
+                    </div>
+                </div>
+                <div class="modal-footer api-modal-border0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="upload-gen-token-modal" tabindex="-1" role="dialog" aria-labelledby="upload-gen-token-modal-title"
+     aria-hidden="true">
+    <div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" id="upload-gen-token-modal-title">
+                        Java 生成管理凭证代码
+                    </h4>
+                </div>
+                <div class="api-modal-content">
+                    <div class="col-sm-12">
+                <pre class="prettyprint  linenums ">
+AccessTokenVoOut result = new AccessTokenVoOut();
+//设置好账号的ACCESS_KEY和SECRET_KEY
+String ACCESS_KEY = tokenVoIn.getAk();
+String SECRET_KEY = tokenVoIn.getSk();
+String url = tokenVoIn.getUrl();
+//密钥配置
+Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+String token = auth.sign(url);
+result.setToken(token);
+result.setJson(JSON.toJSONString(token));
+                       </pre>
+                    </div>
+                </div>
+                <div class="modal-footer api-modal-border0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="down-gen-token-modal" tabindex="-1" role="dialog" aria-labelledby="down-gen-token-modal-title"
+     aria-hidden="true">
+    <div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" id="down-gen-token-modal-title">
+                        Java 生成上传凭证代码
                     </h4>
                 </div>
                 <div class="api-modal-content">

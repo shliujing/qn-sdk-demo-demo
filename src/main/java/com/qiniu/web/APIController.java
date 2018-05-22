@@ -7,6 +7,8 @@ import com.qiniu.entity.BaseResult;
 import com.qiniu.entity.User;
 import com.qiniu.entity.vo.AccessTokenVoIn;
 import com.qiniu.entity.vo.AccessTokenVoOut;
+import com.qiniu.entity.vo.DownTokenVoIn;
+import com.qiniu.entity.vo.UpTokenVoIn;
 import com.qiniu.service.UserService;
 import com.qiniu.util.Auth;
 import com.qiniu.util.Json;
@@ -48,7 +50,7 @@ public class APIController {
         return "api/token";
     }
 
-    @RequestMapping("/genToken")
+    @RequestMapping("/genAccessToken")
     @ResponseBody
     public BaseResult<AccessTokenVoOut> genToken(AccessTokenVoIn tokenVoIn) {
         AccessTokenVoOut result = new AccessTokenVoOut();
@@ -60,6 +62,59 @@ public class APIController {
             //密钥配置
             Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
             String token = auth.sign(url);
+            result.setToken(token);
+            result.setJson(JSON.toJSONString(token));
+        } catch (Exception e) {
+            return new BaseResult<>(e.getMessage(), false);
+        }
+        return new BaseResult<>(result, true);
+    }
+
+    @RequestMapping("/genUpToken")
+    @ResponseBody
+    public BaseResult<AccessTokenVoOut> genUpToken(UpTokenVoIn tokenVoIn) {
+        AccessTokenVoOut result = new AccessTokenVoOut();
+        //设置好账号的ACCESS_KEY和SECRET_KEY
+        String ACCESS_KEY = tokenVoIn.getAk();
+        String SECRET_KEY = tokenVoIn.getSk();
+        String bucket = tokenVoIn.getBucket();
+        String key = tokenVoIn.getKey();
+        try {
+            //密钥配置
+            Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+            String token;
+            if (key == null || key.equals("")) {
+                token = auth.uploadToken(bucket);
+            } else {
+                token = auth.uploadToken(bucket, key);
+            }
+            result.setToken(token);
+            result.setJson(JSON.toJSONString(token));
+        } catch (Exception e) {
+            return new BaseResult<>(e.getMessage(), false);
+        }
+        return new BaseResult<>(result, true);
+    }
+
+    @RequestMapping("/genDownToken")
+    @ResponseBody
+    public BaseResult<AccessTokenVoOut> genDownToken(DownTokenVoIn tokenVoIn) {
+        AccessTokenVoOut result = new AccessTokenVoOut();
+        //设置好账号的ACCESS_KEY和SECRET_KEY
+        String ACCESS_KEY = tokenVoIn.getAk();
+        String SECRET_KEY = tokenVoIn.getSk();
+        String url = tokenVoIn.getUrl();
+        long expires = tokenVoIn.getExpires();
+        try {
+            //密钥配置
+            Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+            String token;
+            if (expires <= 0) {
+                token = auth.privateDownloadUrl(url);
+            } else {
+                token = auth.privateDownloadUrl(url,expires);
+            }
+
             result.setToken(token);
             result.setJson(JSON.toJSONString(token));
         } catch (Exception e) {

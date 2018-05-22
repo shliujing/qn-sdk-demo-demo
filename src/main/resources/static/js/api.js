@@ -1,11 +1,37 @@
 $(function () {
-    $("#gen-token").click(function () {
-        $.get("/api/genToken", {
+    $("#access-gen-token").click(function () {
+        $.get("/api/genAccessToken", {
             ak: $("#ak").val(), sk: $("#sk").val(), url: $("#url").val()
         }, function (data) {
             if (data != null && data.result) {
                 $("#token").val(data.obj.token);
                 $("#retuen-data").val(data.obj.json);
+            } else {
+                alert("生成token失败" + data.desc + "\n");
+            }
+        });
+    });
+
+    $("#upload-gen-token").click(function () {
+        $.get("/api/genUpToken", {
+            ak: $("#upload-ak").val(), sk: $("#upload-sk").val(), bucket: $("#upload-bucket").val(), key: $("#upload-key").val()
+        }, function (data) {
+            if (data != null && data.result) {
+                $("#upload-token").val(data.obj.token);
+                $("#upload-retuen-data").val(data.obj.json);
+            } else {
+                alert("生成token失败" + data.desc + "\n");
+            }
+        });
+    });
+
+    $("#down-gen-token").click(function () {
+        $.get("/api/genDownToken", {
+            ak: $("#down-ak").val(), sk: $("#down-sk").val(), url: $("#down-url").val(), expires: $("#down-expires").val()
+        }, function (data) {
+            if (data != null && data.result) {
+                $("#down-token").val(data.obj.token);
+                $("#down-retuen-data").val(data.obj.json);
             } else {
                 alert("生成token失败" + data.desc + "\n");
             }
