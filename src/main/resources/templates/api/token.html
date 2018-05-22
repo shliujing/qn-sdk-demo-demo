@@ -258,7 +258,6 @@
     </div>
 </div>
 
-
 <!-- 选择检测模板 -->
 <div class="modal fade" id="gen-token-modal" tabindex="-1" role="dialog" aria-labelledby="gen-token-modal-title"
      aria-hidden="true">
@@ -276,7 +275,6 @@
                 <div class="api-modal-content">
                     <div class="col-sm-12">
                 <pre class="prettyprint  linenums ">
-
 AccessTokenVoOut result = new AccessTokenVoOut();
 //设置好账号的ACCESS_KEY和SECRET_KEY
 String ACCESS_KEY = tokenVoIn.getAk();
@@ -287,29 +285,6 @@ Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 String token = auth.sign(url);
 result.setToken(token);
 result.setJson(JSON.toJSONString(token));
-
-AccessTokenVoOut result = new AccessTokenVoOut();
-//设置好账号的ACCESS_KEY和SECRET_KEY
-String ACCESS_KEY = tokenVoIn.getAk();
-String SECRET_KEY = tokenVoIn.getSk();
-String url = tokenVoIn.getUrl();
-//密钥配置
-Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-String token = auth.sign(url);
-result.setToken(token);
-result.setJson(JSON.toJSONString(token));
-
-AccessTokenVoOut result = new AccessTokenVoOut();
-//设置好账号的ACCESS_KEY和SECRET_KEY
-String ACCESS_KEY = tokenVoIn.getAk();
-String SECRET_KEY = tokenVoIn.getSk();
-String url = tokenVoIn.getUrl();
-//密钥配置
-Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-String token = auth.sign(url);
-result.setToken(token);
-result.setJson(JSON.toJSONString(token));
-
                        </pre>
                     </div>
                 </div>
