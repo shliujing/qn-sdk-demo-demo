@@ -45,3 +45,10 @@ java -jar qn-sdk-demo-web-1.0.0.jar
 ```
 
 接着通过浏览器访问 `http://localhost/`，进入登录首页。
+
+
+## 服务器run
+```
+cd /alidata/java/qn-sdk-demo-web/
+ps -ef|grep  qn-sdk-demo-web|grep -v grep|cut -c 9-15|xargs kill -9
+```
