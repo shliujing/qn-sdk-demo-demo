@@ -43,6 +43,19 @@ public class MainController {
     @Resource
     ImageUtils imageUtils;
 
+
+    @RequestMapping("/header")
+    public String header() {
+        return "main/header";
+    }
+
+    @RequestMapping("/footer")
+    public String footer(HttpServletRequest request, Model model) {
+        return "main/footer";
+    }
+
+
+
     //region --------------------------公共操作--------------------------
     @RequestMapping("/admin")
     public String admin(HttpServletRequest request, @ModelAttribute("errorMsg") String errorMsg, Model model) {

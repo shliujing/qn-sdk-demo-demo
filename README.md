@@ -50,5 +50,7 @@ java -jar qn-sdk-demo-web-1.0.0.jar
 ## 服务器run
 ```
 cd /alidata/java/qn-sdk-demo-web/
-ps -ef|grep  qn-sdk-demo-web|grep -v grep|cut -c 9-15|xargs kill -9
+./del.sh
+rz
+./start.sh
 ```
