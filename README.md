@@ -7,6 +7,21 @@
 采用SpringBoot开发，maven管理依赖。使用IDEA直接import项目，下载好依赖后执行run即可。
 
 
+
+## todo
+
+1. uploadToken 缺少encodedPutPolicy，过期时间
+2. qshell的java封装，调用 https://blog.csdn.net/qq_34884729/article/details/71439248
+3. （暂时不需要）搜索功能
+4. （暂时不需要）用表单、验证
+
+
+### 其他有趣的
+
+1. 还有时间控件，截图裁剪
+2. 后期可以加入 步骤（Form Wizards）
+
+
 ## 初始账户
 
 - 测试网址：http://iamlj.com:82/
