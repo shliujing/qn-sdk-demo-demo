@@ -1,6 +1,6 @@
 $(function () {
     $("#access-gen-token").click(function () {
-        $.get("/api/genAccessToken", {
+        $.post("/api/genAccessToken", {
             ak: $("#ak").val(), sk: $("#sk").val(), url: $("#url").val()
         }, function (data) {
             if (data != null && data.result) {

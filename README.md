@@ -7,7 +7,6 @@
 采用SpringBoot开发，maven管理依赖。使用IDEA直接import项目，下载好依赖后执行run即可。
 
 
-
 ## todo
 
 1. uploadToken 缺少encodedPutPolicy，过期时间

@@ -7,8 +7,8 @@ public class Const {
     public final static String errorDesc = "失败";
 
     //设置好账号的ACCESS_KEY和SECRET_KEY
-    public static final String ACCESS_KEY = "VYw7rh_P_P6g6IH_v0zw1Upry5muffStXIly8AsS";
-    public static final String SECRET_KEY = "ctSGEg8UXy_MNpjMbcHf66zISEXX69cRogZVurIk";
+    public static final String ACCESS_KEY = "1oMhuZ5a7zjXSSMjM1KWQKGUpbCkEUw9yxYy1ENE";
+    public static final String SECRET_KEY = "vnq9qhe_rrx4cBHUHOz0Mhz94ai5xAnYf_Pyunkj";
 
     //要上传的空间
     public static final String BUCKET_NAME = "test-pub";
