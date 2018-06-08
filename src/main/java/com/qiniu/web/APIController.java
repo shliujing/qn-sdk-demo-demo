@@ -8,10 +8,7 @@ import com.qiniu.common.Zone;
 import com.qiniu.common.enums.UserTypeEnum;
 import com.qiniu.entity.BaseResult;
 import com.qiniu.entity.User;
-import com.qiniu.entity.vo.AccessTokenVoIn;
-import com.qiniu.entity.vo.AccessTokenVoOut;
-import com.qiniu.entity.vo.DownTokenVoIn;
-import com.qiniu.entity.vo.UpTokenVoIn;
+import com.qiniu.entity.vo.*;
 import com.qiniu.http.Response;
 import com.qiniu.service.UserService;
 import com.qiniu.storage.Configuration;
@@ -64,10 +61,10 @@ public class APIController {
 
     @RequestMapping("/upload")
     public String upload(HttpServletRequest request, @ModelAttribute("errorMsg") String errorMsg, Model model) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null || !UserTypeEnum.isAdmin(user.getUserTypeName())) {
-            return "redirect:/";
-        }
+//        User user = (User) request.getSession().getAttribute("user");
+//        if (user == null || !UserTypeEnum.isAdmin(user.getUserTypeName())) {
+//            return "redirect:/";
+//        }
 
         List<User> users = userService.getUserList();
         model.addAttribute("users", users);
@@ -86,7 +83,7 @@ public class APIController {
         try {
             //密钥配置
             Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-            String token = auth.sign(url);
+            String token = auth.sign("/buckets\\n");
             result.setToken(token);
             result.setJson(JSON.toJSONString(token));
         } catch (Exception e) {
@@ -150,10 +147,11 @@ public class APIController {
 
 
     //文件上传相关代码
+    // todo 加ak、sk、bucket
     @RequestMapping("/uploadFile")
     @ResponseBody
-    public String upload(@RequestParam("test") MultipartFile file) {
-        if (file.isEmpty()) {
+    public String upload(UploadFileVoIn in) {
+        if (in.getFile()==null || in.getFile().isEmpty()) {
             return "文件为空";
         }
         String ACCESS_KEY = Const.ACCESS_KEY;
@@ -162,10 +160,12 @@ public class APIController {
         Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
         UploadManager uploadManager = new UploadManager(new Configuration(Zone.autoZone()));
         String prefix = "test/sdk/file/";
-        String fileName = file.getOriginalFilename();
+        if (in.getKey()!=null) {
+        }
+        String fileName = in.getFile().getOriginalFilename();
 
         try {
-            Response res = uploadManager.put(file.getBytes(), prefix + fileName, auth.uploadToken(bucketname));
+            Response res = uploadManager.put(in.getFile().getBytes(), prefix + fileName, auth.uploadToken(bucketname));
             System.out.println(res.bodyString());
             return "上传成功";
         } catch (QiniuException e) {

@@ -90,17 +90,17 @@
 
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <form action="/api/uploadFile" method="POST" enctype="multipart/form-data">
-                            文件：<input type="file" name="test"/>
-                            <input type="submit" />
-                        </form>
+                        <div action="/api/uploadFile" method="POST" enctype="multipart/form-data">
+                            文件：<input type="file" id="file1" name="test"/>
+                            <input type="submit" value="上传" id="btn_uploadimg"/>
+                        </div>
                         <a href="/download">下载test</a>
                         <p>多文件上传</p>
-                        <form method="POST" enctype="multipart/form-data" action="/api/batchUploadFile">
+                        <div method="POST" enctype="multipart/form-data" action="/api/batchUploadFile">
                             <p>文件1：<input type="file" name="file" /></p>
                             <p>文件2：<input type="file" name="file" /></p>
                             <p><input type="submit" value="上传" /></p>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
@@ -129,6 +129,32 @@
 <script type="text/javascript">
     $("#header").load("/main/header");
     $("#footer").load("/main/footer");
+
+    $(function () {
+        $("#btn_uploadimg").click(function () {
+            // var fileObj = $("#file1").files[0];
+            var fileObj = document.getElementById("file1")[0];
+
+            var formFile = new FormData();
+            formFile.append("action", "UploadVMKImagePath");
+            // formFile.append("file", fileObj); //加入文件对象
+            formFile.append("file", $('#file1')[0].files[0]); //加入文件对象
+
+            // var data = formFile;
+            $.ajax({
+                url: "/api/uploadFile",
+                data: formFile,
+                type: "Post",
+                // dataType: "json",
+                cache: false,//上传文件无需缓存
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false, //必须
+                success: function (result) {
+                    alert("上传完成!");
+                },
+            })
+        })
+    })
 </script>
 </body>
 </html>
